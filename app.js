@@ -6,7 +6,7 @@ var password = "Hello darkness";
 var app = express();
 
 
-//создание парсера
+//создание парсеров
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const jsonParser = express.json();
@@ -28,13 +28,13 @@ app.post("/register", urlencodedParser, function (request, response) {
         database: "mydbnp",
         password: "tubgtn2011"
     });
-    // тестирование подключения
+    // тестирование подключений
     connection.connect(function (err) {
         if (err) {
             return console.error("Ошибка: " + err.message);
         }
         else {
-            console.log("Подключение к серверу MySQL успешно установлено");
+            console.log("Подключение к серверу MySQL отлично установился");
         }
     });
 
@@ -65,15 +65,15 @@ app.post("/register", urlencodedParser, function (request, response) {
     const sql1 = "INSERT INTO usersnp(userLogin, userSurname, userName, UserPatron, userPassSer, userPassNum) VALUES(?, ?, ?, ?, ?, ?)";
     connection.query(sql1, user, function (err, result) {
         if (err) console.log(err);
-        else console.log("Данные добавлены");
+        else console.log("Данные добавились");
     });
 
-    // закрытие подключения
+    // завершение подключения
     connection.end(function (err) {
         if (err) {
-            return console.log("Ошибка: " + err.message);
+            return console.log("Ошибочка: " + err.message);
         }
-        console.log("Подключение закрыто");
+        console.log("Подключение остановлено");
     });
 });
 app.listen(3000);
