@@ -83,15 +83,15 @@ console.log("hash: " + genHash);
 });
 
 function RandomPassword(){
-     var StringPassword = "",
-              StringSymbols = "1234567890qwertyuiopasdfghjklzxcvbnm",
-         CountRandom = 10 ;
-     for (var i = 0; i<CountRandom; i++) {
-              Random = Math.round(Math.random()StringSymbols.length);
-         var RandomUpper = Math.round(Math.random()10);
-              if (RandomUpper>=5) {StringPassword += StringSymbols[Random];}
-             if (RandomUpper<5) {StringPassword += StringSymbols[Random];}
-     }
-     return(StringPassword);
+var StringPassword = "",
+StringSymbols = "1234567890qwertyuiopasdfghjklzxcvbnm",
+CountRandom = 10 ;
+for (var i = 0; i<CountRandom; i++) {
+Random = Math.round(Math.random()*StringSymbols.length);
+var RandomUpper = Math.round(Math.random()*10);
+if (RandomUpper>=5) {StringPassword += StringSymbols[Random];}
+if (RandomUpper<5) {StringPassword += StringSymbols[Random];}
+}
+return(StringPassword);
 }
 app.listen(3000);
