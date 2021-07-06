@@ -1,5 +1,3 @@
-const mysql = require("mysql2");
-const express = require('express');
 var crypto = require("crypto");
 var algorithm = "aes-192-cbc"; //algorithm to use
 var password = "Hello darkness";
@@ -7,6 +5,8 @@ var app = express();
 
 
 //создание парсеров
+const mysql = require("mysql2");
+const express = require('express');
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const jsonParser = express.json();
@@ -50,7 +50,12 @@ app.post("/register", urlencodedParser, function (request, response) {
     userPassNum int
   )`;
 
-
+const subpassword = RandomPassword();
+var hash = crypto.createHash("sha512");
+console.log(subpassword);
+data = hash.update(subpassword, "utf-8");
+genHash = data.digest("hex");
+console.log("hash: " + genHash);
 
 
 
@@ -76,4 +81,17 @@ app.post("/register", urlencodedParser, function (request, response) {
         console.log("Подключение остановлено");
     });
 });
+
+function RandomPassword(){
+     var StringPassword = "",
+              StringSymbols = "1234567890qwertyuiopasdfghjklzxcvbnm",
+         CountRandom = 10 ;
+     for (var i = 0; i<CountRandom; i++) {
+              Random = Math.round(Math.random()StringSymbols.length);
+         var RandomUpper = Math.round(Math.random()10);
+              if (RandomUpper>=5) {StringPassword += StringSymbols[Random];}
+             if (RandomUpper<5) {StringPassword += StringSymbols[Random];}
+     }
+     return(StringPassword);
+}
 app.listen(3000);
