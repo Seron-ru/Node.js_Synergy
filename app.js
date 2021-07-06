@@ -1,3 +1,5 @@
+const mysql = require("mysql2");
+const express = require('express');
 var crypto = require("crypto");
 var algorithm = "aes-192-cbc"; //algorithm to use
 var password = "Hello darkness";
@@ -5,8 +7,6 @@ var app = express();
 var crypto = require("crypto");
 
 //создание парсера
-const mysql = require("mysql2");
-const express = require('express');
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const jsonParser = express.json();
@@ -40,7 +40,7 @@ app.post("/register", urlencodedParser, function (request, response) {
 
 
 
-	const sqlCreate = `create table if not exists usersnp(
+	const sqlCreate = `create table if not exists usersnp2(
     id int primary key auto_increment,
     userLogin varchar(300),
     userSurname varchar(300),
@@ -69,7 +69,7 @@ app.post("/register", urlencodedParser, function (request, response) {
 
 	const user = [arr.userLogin, arr.userSurname, arr.userName, arr.userPatron, arr.userPassSer, arr.userPassNum, password];
 
-	const sql1 = "INSERT INTO usersnp(userLogin, userSurname, userName, UserPatron, userPassSer, userPassNum, password) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	const sql1 = "INSERT INTO usersnp2(userLogin, userSurname, userName, UserPatron, userPassSer, userPassNum, password) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	connection.query(sql1, user, function (err, result) {
 		if (err) console.log(err);
 		else console.log("Данные добавлены");
