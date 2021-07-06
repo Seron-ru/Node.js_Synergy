@@ -47,7 +47,8 @@ app.post("/register", urlencodedParser, function (request, response) {
     userName varchar(300),
     userPatron varchar(300) ,
     userPassSer int,
-    userPassNum int
+    userPassNum int,
+	Password varchar(300) unique
 )`;
 
 	const subpassword = RandomPassword();
@@ -56,6 +57,7 @@ app.post("/register", urlencodedParser, function (request, response) {
 	data = hash.update(subpassword, "utf-8");
 	genHash = data.digest("hex");
 	console.log("hash: " + genHash);
+	const password = genHash;
 
 
 
@@ -65,9 +67,9 @@ app.post("/register", urlencodedParser, function (request, response) {
 		else console.log("Таблица создана");
 	});
 
-	const user = [arr.userLogin, arr.userSurname, arr.userName, arr.userPatron, arr.userPassSer, arr.userPassNum];
+	const user = [arr.userLogin, arr.userSurname, arr.userName, arr.userPatron, arr.userPassSer, arr.userPassNum, password];
 
-	const sql1 = "INSERT INTO usersnp(userLogin, userSurname, userName, UserPatron, userPassSer, userPassNum) VALUES(?, ?, ?, ?, ?, ?)";
+	const sql1 = "INSERT INTO usersnp(userLogin, userSurname, userName, UserPatron, userPassSer, userPassNum, password) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	connection.query(sql1, user, function (err, result) {
 		if (err) console.log(err);
 		else console.log("Данные добавлены");
@@ -94,4 +96,5 @@ function RandomPassword() {
 	}
 	return (StringPassword);
 }
+
 app.listen(3000);
